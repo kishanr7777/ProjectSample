@@ -1,0 +1,14 @@
+.reply-input{margin-left: 15px;margin-bottom: 15px;}
+.old-comment-image{float: right;}
+.old-comment-container{background-color: #eee;padding: 10px 10px;border-radius: 32px;margin-right: 10px;vertical-align: middle;}
+.old-comment-container{padding-right: 10px;}
+.replies{margin-top: 25px;margin-left: 15px;margin-bottom: 20px;}
+.doComment{margin-top: 20px;margin-left: 30px;}
+.reply-textarea{padding-left: 0px;}
+.reply-textarea>input{border-radius: 20px;background-color: #eee;}
+button{width: 100%;background-color: #657889;border-color: #657889;width: 80px;}
+button:hover, button:focus, button:active, button:active:focus{background-color: #455665;border-color: #455565;outline: none;}
+.post-comment{padding:0px 0px;}
+.post-comment>button{width: 60px;border-radius: 18px;}
+.link{cursor: pointer;color: #657889;}
+.link:hover{text-decoration: underline;}

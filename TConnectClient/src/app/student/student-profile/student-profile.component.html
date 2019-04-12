@@ -1,0 +1,589 @@
+<div *ngIf="isLoaded">
+	<div class="row"><br><br>
+		<div class="col-md-3"></div>
+		<div class="col-md-6  logo-background">
+			<div class="row ">
+				<div class="col-md-2 col-sm-2 profile-pic-container" title="Change Profile">
+					<!-- <img alt="Company Profile Pic" src="../../../assets/img/tatva.jpg"> -->
+						<input name="profile" class="hide" type="file" (change)="profileChanged($event)" id="fileInput">
+						<app-avatar [type]="'organisation'" [height]="100" [width]="100" [profileUrl]="image" (click)="changeProfile()"></app-avatar>
+						<div class="change-pic">Change</div>
+				</div>
+				
+				<div class="col-sm-8 col-xs-6">
+					<div class="company-info">
+
+						<span class="company-title">{{studentProfile.firstName}} {{studentProfile.lastName}}</span><br>
+						<div *ngIf="studentProfile.education.length"><span class="bold">{{studentProfile.education[0].degreeClassification}}
+								at
+								{{studentProfile.education[0].university}}</span>
+						</div>
+						<div *ngIf="!studentProfile.education.length">
+							Please add your degree details
+						</div>
+						<div *ngIf="studentProfile.currentDegreeYear && studentProfile.currentDegreeName"><span class="bold">{{studentProfile.currentDegreeYear}}
+								{{studentProfile.currentDegreeName}}</span>
+						</div>
+						<div *ngIf="!(studentProfile.currentDegreeYear && studentProfile.currentDegreeName && studentProfile.education)">
+							Please add you personal details
+						</div>
+
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-6 clearfix"><br>
+					<span><a href="#" data-backdrop="static" data-toggle="modal" data-target="#studentInfo"><img class="pull-right edit-pen"
+							 alt="Edit" (click)="editProfile()" src="/assets/img/edit-white.svg"></a></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 cmp-profile">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#career">Career Goals</a></li>
+				<li><a data-toggle="tab" href="#skills">Skills</a></li>
+				<li><a data-toggle="tab" href="#achievements">Achievements</a></li>
+				<li><a data-toggle="tab" href="#education">Education</a></li>
+				<li><a data-toggle="tab" href="#experience">Experience</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="career" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-11  col-xs-6">
+							<br>
+							<div class="bold">Career Goal</div>
+							<div *ngIf="studentProfile.careerGoal" [innerHTML]="studentProfile.careerGoal"></div>
+
+						</div>
+						<div class="col-md-1  col-xs-6">
+							<br><a href="#" (click)="editCareerGoal()" data-backdrop="static" data-toggle="modal" data-target="#careerGoal"><img
+								 class="edit-pen" alt="Edit" src="assets/img/edit-grey.svg"></a>
+						</div>
+					</div>
+				</div>
+				<div id="skills" class="tab-pane fade clearfix">
+					<div *ngIf="studentProfile.skills">
+						<span *ngFor="let s of studentProfile.skills" class="add-delete-list ">
+							<span class="list-name">{{s}}</span><span (click)="deleteSkill(s)" class="glyphicon glyphicon-remove"></span>
+						</span>
+					</div>
+					<a href="#" class="achievement" (click)="newFields()" data-backdrop="static" data-toggle="modal" data-target="#studentSkill">+&nbsp;&nbsp;&nbsp;Add
+						New Skill</a>
+				</div>
+				<div id="achievements" class="tab-pane fade">
+					<div class="row">
+						<div *ngIf="studentProfile.achievement">
+							<div *ngFor="let achievement of studentProfile.achievement">
+								<br>
+								<div class="col-sm-10 col-xs-6">
+									<span><b>{{achievement.title}}</b> := {{achievement.description}}
+									</span>
+								</div>
+								<div class="col-sm-2 col-xs-6">
+									<a href="#" (click)="editAchievement(achievement)" data-backdrop="static" data-toggle="modal" data-target="#studentAchievement"><img
+										 class="edit-pen" alt="Edit" src="assets/img/edit-grey.svg"></a>
+									<a href="#"><img class="edit-pen" (click)="deleteAchievement(achievement)" alt="Delete" src="assets/img/deleteIcon2.ico"></a>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="col-sm-2">
+						</div>
+					</div>
+
+					<a href="#" class="achievement" data-backdrop="static" data-toggle="modal" (click)="newFields()" data-target="#studentAchievement">+&nbsp;&nbsp;&nbsp;Add
+						Achievement</a>
+				</div>
+				<div id="education" class="tab-pane fade">
+					<div class="row">
+						<div *ngIf="studentProfile.education">
+							<div *ngFor="let education of studentProfile.education">
+								<br>
+								<div class="col-sm-10  col-xs-6">
+									<div class="heading">{{education.university}}</div>
+									<div><span>{{education.degreeType}}</span> in <span>{{education.courseStudied}}</span></div>
+									<div><span>{{education.startDate | date: 'MM/dd/yyyy'}}</span> - <span>{{education.finishDate | date:
+											'MM/dd/yyyy'}}</span></div>
+									<div>{{education.degreeClassification}}</div><br>
+								</div>
+								<div class="col-sm-2  col-xs-6">
+									<a href="#" (click)="editEducation(education)" data-backdrop="static" data-toggle="modal" data-target="#studentEducationList"><img
+										 class="edit-pen" alt="Edit" src="assets/img/edit-grey.svg"></a>
+									<a href="#"><img class="edit-pen" (click)="deleteEducation(education)" alt="Delete" src="assets/img/deleteIcon2.ico"></a>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="col-sm-2">
+						</div>
+					</div>
+
+
+					<a href="#" class="achievement" data-backdrop="static" (click)="newFields()" data-toggle="modal" data-target="#studentEducationList">+&nbsp;&nbsp;&nbsp;Add
+						Education</a>
+				</div>
+				<div id="experience" class="tab-pane fade">
+
+					<div class="row">
+						<div *ngIf="studentProfile.experience">
+							<div *ngFor="let experience of studentProfile.experience">
+								<br>
+								<div class="col-sm-10 col-xs-6">
+									<div><b>{{experience.jobPosition}}</b></div>
+									<div><span>{{experience.jobType}}</span> at <span>{{experience.company}}</span>, {{experience.location}}</div>
+									<div><span>{{experience.startDate | date: 'MM/dd/yyyy'}}</span> - <span>{{experience.finishDate | date:
+											'MM/dd/yyyy'}}</span></div><br>
+								</div>
+								<div class="col-sm-2 col-xs-6">
+									<a href="#" (click)="editExperience(experience)" data-backdrop="static" data-toggle="modal" data-target="#studentExperience"><img
+										 class="edit-pen" alt="Edit" src="assets/img/edit-grey.svg"></a>
+									<a href="#"><img class="edit-pen" (click)="deleteExperience(experience)" alt="Delete" src="assets/img/deleteIcon2.ico"></a>
+
+								</div>
+
+							</div>
+						</div>
+						<div class="col-sm-2">
+						</div>
+					</div>
+					<a href="#" class="achievement" (click)="newFields()" data-backdrop="static" data-toggle="modal" data-target="#studentExperience">+&nbsp;&nbsp;&nbsp;Add
+						Experience</a>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+
+
+
+
+	<div class="modal fade" id="careerGoal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" data-dismiss="modal" class="close">&times;</button>
+					<h4 class="modal-title">Edit Career Goal</h4>
+				</div>
+				<div class="modal-body">
+					<ckeditor [(ngModel)]="careerGoal"></ckeditor>
+					<div *ngIf="!careerGoal" class="form-error">
+						Career Goal cannot be empty
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" *ngIf="careerGoal" class="btn btn-primary" (click)="saveCareerGoal()" data-dismiss="modal">Edit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="studentSkill" static role="dialog">
+		<div class="modal-dialog">
+			<form>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add New Skill</h4>
+					</div>
+					<div class="modal-body">
+						<input class="form-control" type="text" name="skill" [(ngModel)]="skill" #newSkill="ngModel" required>
+						<div *ngIf="newSkill.invalid && (newSkill.dirty || newSkill.touched)" class="form-error">
+							<div *ngIf="newSkill.errors.required">
+								New skill cannot be empty
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" [disabled]="newSkill.invalid" class="btn btn-primary" (click)="addNewSkill()" data-dismiss="modal">Add</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!--Modals-->
+
+	<!--Student Achievement-->
+	<div class="modal fade" id="studentAchievement" role="dialog">
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Add Achievement</h4>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Achievement Title*</label>
+							<!-- <textarea class="cus-textbox" rows="1"></textarea> -->
+							<input name="title" [(ngModel)]="achievement.title" type="text" class="form-control" #achivementTitle="ngModel"
+							 required>
+							<div *ngIf="achivementTitle.invalid && (achivementTitle.dirty || achivementTitle.touched)" class="form-error">
+								<div *ngIf="achivementTitle.errors.required">
+									Achievement Title cannot be empty
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Achievement Description*</label>
+							<textarea name="description" [(ngModel)]="achievement.description" class="cus-textbox form-control" rows="8"
+							 #achivementDescription="ngModel" required></textarea>
+							<div *ngIf="achivementDescription.invalid && (achivementDescription.dirty || achivementDescription.touched)"
+							 class="form-error">
+								<div *ngIf="achivementDescription.errors.required">
+									Achivement Description cannot be empty
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+				<div class="modal-footer">
+					<div *ngIf="isNew">
+						<button type="button" [disabled]="achivementTitle.invalid || achivementDescription.invalid" class="btn btn-primary"
+						 (click)="addAchievement()" data-dismiss="modal">Add</button>
+					</div>
+					<div *ngIf="!isNew">
+						<button type="submit" [disabled]="achivementTitle.invalid || achivementDescription.invalid" class="btn btn-primary"
+						 (click)="addAchievement()" data-dismiss="modal">Edit</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Student Education-->
+	<div class="modal fade" id="studentEducationList" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<form>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Education</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>University*</label>
+							<div>
+
+								<input name="university" (input)="_filterUniversities()" type="text" class="form-control" matInput [(ngModel)]="education.university"
+								 placeholder="Enter University" [matAutocomplete]="auto" #university="ngModel">
+								<mat-autocomplete #auto="matAutocomplete">
+									<mat-option *ngFor="let option of filterUniversities" [value]="option">
+										{{option}}
+									</mat-option>
+								</mat-autocomplete>
+
+								<div *ngIf="university.invalid && (university.dirty || university.touched)" class="form-error">
+									<div *ngIf="university.errors.required">
+										University cannot be empty
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Course Studied*</label>
+							<div>
+								<input name="courseStudied" type="text" class="form-control" [(ngModel)]="education.courseStudied"
+								 #courseStudied="ngModel" required>
+								<div *ngIf="courseStudied.invalid && (courseStudied.dirty || courseStudied.touched)" class="form-error">
+									<div *ngIf="courseStudied.errors.required">
+										Course Studied cannot be empty
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Degree Type*</label>
+									<div>
+										<input type="text" name="degreeType" class="form-control" [(ngModel)]="education.degreeType" #degreeType="ngModel"
+										 required>
+										<div *ngIf="degreeType.invalid && (degreeType.dirty || degreeType.touched)" class="form-error">
+											<div *ngIf="degreeType.errors.required">
+												Degree Type cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Degree Classification*</label>
+									<div>
+										<input type="text" name="degreeClassification" class="form-control" [(ngModel)]="education.degreeClassification"
+										 #degreeClassification="ngModel" required>
+										<div *ngIf="degreeClassification.invalid && (degreeClassification.dirty || degreeClassification.touched)"
+										 class="form-error">
+											<div *ngIf="degreeClassification.errors.required">
+												Degree Classification cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>When did you start?*</label>
+									<div>
+										<input class="form-control" name="degStartDate" matInput [matDatepicker]="educationStartDate" (click)="educationStartDate.open()"
+										 [(ngModel)]="education.startDate" #degStartDate="ngModel" required>
+										<div *ngIf="degStartDate.invalid && (degStartDate.dirty || degStartDate.touched)" class="form-error">
+											<div *ngIf="degStartDate.errors.required">
+												Degree Start Date cannot be empty
+											</div>
+										</div>
+										<mat-datepicker #educationStartDate></mat-datepicker>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>When did you finish?*</label>
+									<div>
+										<input class="form-control" name="degFinishDate" matInput [matDatepicker]="educationEndDate" (click)="educationEndDate.open()"
+										 [(ngModel)]="education.finishDate" #degFinishDate="ngModel" required>
+										<mat-datepicker #educationEndDate></mat-datepicker>
+										<div *ngIf="degFinishDate.invalid && (degFinishDate.dirty || degFinishDate.touched)" class="form-error">
+											<div *ngIf="degFinishDate.errors.required">
+												Degree Finish Date cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">`
+						<div *ngIf="isNew">
+							<button type="submit" [disabled]="degFinishDate.invalid || degStartDate.invalid  || degreeClassification.invalid || degreeType.invalid|| courseStudied.invalid || university.invalid"
+							 class="btn btn-primary" (click)="addEducation()" data-dismiss="modal">Add</button>
+						</div>
+						<div *ngIf="!isNew">
+							<button type="submit" [disabled]="degFinishDate.invalid || degStartDate.invalid  || degreeClassification.invalid || degreeType.invalid|| courseStudied.invalid || university.invalid"
+							 class="btn btn-primary" (click)="addEducation()" data-dismiss="modal">Edit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!--Student Experience-->
+	<div class="modal fade" id="studentExperience" role="dialog">
+		<div class="modal-dialog">
+			<form>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Add Experience</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Job Position*</label>
+									<div>
+										<input type="text" name="jobPosition" class="form-control" [(ngModel)]="experience.jobPosition" #jobPosition="ngModel"
+										 required>
+										<div *ngIf="jobPosition.invalid && (jobPosition.dirty || jobPosition.touched)" class="form-error">
+											<div *ngIf="jobPosition.errors.required">
+												Job Position cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Company*</label>
+									<div>
+										<input type="text" name="company" class="form-control" [(ngModel)]="experience.company" #companyName="ngModel"
+										 required>
+										<div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" class="form-error">
+											<div *ngIf="companyName.errors.required">
+												Company name cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Job Type*</label>
+									<div>
+										<input type="text" name="jobType" class="form-control" [(ngModel)]="experience.jobType" #jobType="ngModel"
+										 required>
+										<div *ngIf="jobType.invalid && (jobType.dirty || jobType.touched)" class="form-error">
+											<div *ngIf="jobType.errors.required">
+												Job Type cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>Location</label>
+									<div>
+										<input type="text" name="location" class="form-control" [(ngModel)]="experience.location" #location="ngModel"
+										 required>
+										<div *ngIf="location.invalid && (location.dirty || location.touched)" class="form-error">
+											<div *ngIf="location.errors.required">
+												location cannot be empty
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>When did you start?*</label>
+									<div>
+										<input class="form-control" name="experienceStartDate" [(ngModel)]="experience.startDate" matInput
+										 [matDatepicker]="ExperienceStartDate" (click)="ExperienceStartDate.open()" #expStartDate="ngModel" required>
+										<div *ngIf="expStartDate.invalid && (expStartDate.dirty || expStartDate.touched)" class="form-error">
+											<div *ngIf="expStartDate.errors.required">
+												Experience start Date cannot be empty
+											</div>
+										</div>
+										<mat-datepicker #ExperienceStartDate></mat-datepicker>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<label>When did you finish?*</label>
+									<div>
+										<input class="form-control" name="experienceEndDate" [(ngModel)]="experience.finishDate" matInput
+										 [matDatepicker]="ExperienceEndDate" (click)="ExperienceEndDate.open()" #expFinishDate="ngModel" required>
+										<div *ngIf="expFinishDate.invalid && (expFinishDate.dirty || expFinishDate.touched)" class="form-error">
+											<div *ngIf="expFinishDate.errors.required">
+												Experience Finish Date cannot be empty
+											</div>
+										</div>
+										<mat-datepicker #ExperienceEndDate></mat-datepicker>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<div *ngIf="isNew">
+							<button type="button" [disabled]="expStartDate.invalid || expFinishDate.invalid || location.invalid || jobType.invalid || companyName.invalid || jobPosition.invalid"
+							 class="btn btn-primary" (click)="addExperience()" data-dismiss="modal">Add</button>
+						</div>
+						<div *ngIf="!isNew">
+							<button type="submit" [disabled]="expStartDate.invalid || expFinishDate.invalid || location.invalid || jobType.invalid || companyName.invalid || jobPosition.invalid"
+							 class="btn btn-primary" (click)="addExperience()" data-dismiss="modal">Edit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<!--Edit profile-->
+	<div class="modal fade" id="studentInfo" role="dialog">
+		<div class="modal-dialog">
+			<form>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Edit Profile</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Firstname*</label>
+									<input name="firstName" class="form-control" type="text" [(ngModel)]="studentInfo.firstName" #firstName="ngModel"
+									 required>
+									<div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="form-error">
+										<div *ngIf="firstName.errors.required">
+											Firstname cannot be empty
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Lastname*</label>
+									<input name="lastName" class="form-control" type="text" [(ngModel)]="studentInfo.lastName" #lastName="ngModel"
+									 required>
+									<div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="form-error">
+										<div *ngIf="lastName.errors.required">
+											Lastname cannot be empty
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Year*</label>
+									<select name="year" class="form-control" [(ngModel)]="studentInfo.currentDegreeYear" #year="ngModel" required>
+										<option *ngFor="let year of years" [ngValue]="year.name">{{year.name}}</option>
+									</select>
+									<div *ngIf="year.invalid && (year.dirty || year.touched)" class="form-error">
+										<div *ngIf="year.errors.required">
+											Year cannot be empty
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Type of Study*</label>
+									<select name="typeStudy" class="form-control" [(ngModel)]="studentInfo.currentDegreeName" #typeStudy="ngModel"
+									 required>
+										<option *ngFor="let degree of degrees" [ngValue]="degree.name">{{degree.name}}</option>
+									</select>
+									<div *ngIf="typeStudy.invalid && (typeStudy.dirty || typeStudy.touched)" class="form-error">
+										<div *ngIf="typeStudy.errors.required">
+											Type of Study cannot be empty
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button data-dismiss="modal" type="button" *ngIf="!(typeStudy.invalid || year.invalid || lastName.invalid || firstName.invalid)"
+						 class="btn btn-primary" (click)="saveProfile()">Edit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

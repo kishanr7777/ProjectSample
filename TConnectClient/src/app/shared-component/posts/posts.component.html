@@ -1,0 +1,83 @@
+<div class="post">
+	<div class="row">
+		<div class="top col-sm-8">
+			<app-avatar [type]="'organisation'" [height]="80" [width]="80" [profileUrl]="post.profileImageURL"></app-avatar>
+			<div style="width: 10px;"></div>
+			<div class="flex-1 flex flex-column space-around avtar-text">
+				<div style="font-weight: 900;">{{post.firstName}} {{post.lastName}}<span style="font-weight: normal;"> at</span>
+					{{post.companyName}}</div>
+				<div style="font-size: 12px;">{{post.creationTime | amTimeAgo}}</div>
+			</div>
+		</div>
+
+		<!-- <div class="col-sm-4">
+			<a href="#" class="btn btn-primary post-edit-delete">
+				<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+				<span><strong>Edit</strong></span>
+			</a>
+			<a href="#" class="btn btn-primary ">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+				<span><strong>Delete</strong></span>
+			</a>
+		</div> -->
+	</div>
+	<div>
+		<div class="post-content">
+			{{post.content}}
+		</div>
+		<div class="attachments" *ngIf="images">
+			<div *ngFor="let attachment of images" style="width: 50%;">
+				<div class="pic" [ngStyle]="{'background-image': 'url(' + attachment + ')'}">
+					<div style="padding-top: 100%;"></div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="videos" class="attachments">
+			<div *ngFor="let attachment of videos" style="width: 50%;">
+				<video width="100%" height="100%" controls>
+					<source src="{{attachment}}">
+					Your browser does not support HTML5 video.
+				</video>
+			</div>
+		</div>
+		<div class="attachments">
+			<div *ngFor="let attachment of files">
+				<div class="otherFiles">
+					<a href="{{attachment}}" target="_blank" download>file</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<span *ngIf="post.likedByCurrentUser">
+		<img class="like" (click)="likePost(post.likedByCurrentUser)" alt="Thumb" height="15" src="../../assets/img/thumb-grey.svg">
+		You and {{post.likes}} other liked this
+	</span>
+	<span *ngIf="!post.likedByCurrentUser">
+		<img class="like" (click)="likePost(post.likedByCurrentUser)" alt="Thumb" height="15" src="../../assets/img/thumb-black.svg">
+		({{post.likes}}) likes
+	</span>
+	<span class="comments" (click)="showComments = !showComments">
+		<span *ngIf="post.commentList;else countComment">
+			<span>{{post.commentList?.length}}</span>
+		</span>
+		<ng-template #countComment>0</ng-template> comments
+	</span>
+
+	<div *ngIf="showComments" class="comment-list">
+		<app-comment-list [postId]="post.creationTime" [type]="'post'" [comments]="post.commentList"></app-comment-list>
+	</div>
+
+	<div class="row doComment">
+		<div class="col-xs-1 comment-container">
+			<app-avatar class="comment-image" [type]="'personal'" [height]="40" [width]="40" [profileUrl]="user.user.profileImageURL"></app-avatar>
+		</div>
+		<div class="col-xs-9">
+			<textarea placeholder="Write Comments" [(ngModel)]="commentText" rows="2" class="form-control" #comment="ngModel"
+			 required></textarea>
+		</div>
+		<div class="col-xs-2 post-comment">
+			<button class="btn btn-primary" (click)="doComment()" [disabled]="comment.invalid">Post</button>
+		</div>
+	</div>
+</div>

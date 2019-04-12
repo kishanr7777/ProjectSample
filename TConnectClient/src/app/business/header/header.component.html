@@ -1,0 +1,21 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/">tConnect</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+          <li><img class="icon" src="/assets/ntf-icon.svg"/></li>
+          <li><img class="icon" src="/assets/msg-icon.svg"/></li>
+          <li routerLink="/agentProfile">
+                <!--app avtar-->
+              <app-avatar [type]="'personal'" [height]="26" [width]="26" [profileUrl]="user.agent.profileImageURL"></app-avatar>
+          </li>
+          <li class="icon name">{{user.agent.firstName}} at {{user.agent.company}}</li>
+          <li routerLink="/companyProfile">
+              <!--app avtar-->
+              <app-avatar [type]="'organisation'" [height]="26" [width]="26" [profileUrl]="company.companyObject.profileImageURL"></app-avatar>
+          </li>
+      <li><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>

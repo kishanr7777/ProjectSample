@@ -1,0 +1,149 @@
+<div *ngIf="companyObject">
+	<div class="row"><br><br>
+		<div class="col-md-3"></div>
+		<div class="col-md-6  logo-background">
+			<div class="row ">
+				<div class="col-sm-3">
+					<!-- <img alt="Company Profile Pic" src="../../../assets/img/tatva.jpg"> -->
+					<app-avatar [type]="'organisation'" [height]="130" [width]="130" [profileUrl]="companyObject.profileImageURL"></app-avatar>
+				</div>
+				<div class="col-sm-6">
+					<div class="company-info">
+
+						<span class="company-title">{{companyObject.name}}</span><br>
+						<span class="bold">{{companyObject.orgType}}</span> | <span class="bold">{{companyObject.location}}</span><br>
+						<span class="bold">{{companyObject.sector}}</span><br>
+						<span>{{companyObject.size}} employees</span><br>
+						<span><a class="cmp-link" [href]="companyObject.website" target="_blank">{{companyObject.website}}</a></span><br><br>
+
+					</div>
+				</div>
+				<div class="col-sm-3 clearfix"><br>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-3">
+				</div>
+				<div class="col-sm-6">
+					<div *ngIf="companyObject.followed">
+						<button class="follow-unfollow" (click)="followCompany(companyObject, !companyObject.followed)">Unfollow</button>
+					</div>
+					<div *ngIf="!companyObject.followed">
+						<button class="follow-unfollow" (click)="followCompany(companyObject, !companyObject.followed)">Follow</button>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<img class="edit-pen" alt="File" src="/assets/img/file-white.svg">
+					<span class="company-info"> Media[<span>0</span>]</span>
+				</div>
+			</div>
+
+
+
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 cmp-profile">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#about">About Us</a></li>
+				<li><a data-toggle="tab" href="#projects">Projects</a></li>
+				<li><a data-toggle="tab" href="#working">Working Here</a></li>
+				<li><a data-toggle="tab" href="#opportunities">Opportunities</a></li>
+				<li><a data-toggle="tab" href="#posts">Posts</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="about" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-md-11">
+							<br>
+							<b>Bio:</b><br><span class="prewrap" *ngIf="companyObject.bio">{{companyObject.bio}}</span>
+							<span class="prewrap" *ngIf="!companyObject.bio">Please Enter Bio</span>
+						</div>
+						<div class="col-md-1">
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-11">
+							<br>
+							<b>Our Mission</b><br>
+							<span class="prewrap" *ngIf="companyObject.mission">{{companyObject.mission}}</span>
+							<span class="prewrap" *ngIf="!companyObject.mission">
+								Please Enter Mission</span>
+						</div>
+						<div class="col-md-1">
+
+						</div>
+					</div>
+
+
+				</div>
+				<div id="projects" class="tab-pane fade">
+					<div class="project-template " *ngFor="let project of companyObject.project; index as i">
+						<div class="row">
+							<div class="col-md-11">
+								<span><b>{{project.title}}</b></span>
+								<div>{{project.description}}</div>
+							</div>
+							<div class="col-md-1">
+
+							</div>
+						</div>
+					</div>
+
+					<br>
+
+
+				</div>
+				<div id="working" class="tab-pane fade">
+					<div class="row">
+
+						<div class="col-md-11">
+							<br>
+							<b>Working Here</b><br>
+							<span class="prewrap" *ngIf="companyObject.workingHere">{{companyObject.workingHere}}</span>
+							<span class="prewrap" *ngIf="!companyObject.workingHere">
+								Please Fill Working Here Part.</span>
+						</div>
+						<div class="col-md-1">
+
+
+						</div>
+					</div>
+				</div>
+				<div id="opportunities" class="tab-pane fade">
+					<div *ngFor="let opportunity of companyOpportunity">
+						<div *ngIf="companyObject.followed;else notFollwed">
+							<app-opportunity [userType]="student" [opportunity]="opportunity"></app-opportunity>
+						</div>
+						<ng-template #notFollwed>
+							<div *ngIf="opportunity.visibleToAll">
+								<app-opportunity [userType]="student" [opportunity]="opportunity"></app-opportunity>
+							</div>
+						</ng-template>
+					</div>
+				</div>
+				<div id="posts" class="tab-pane fade">
+					<div *ngFor="let post of companyPosts">
+
+						<div *ngIf="companyObject.followed;else notFollowing">
+							<app-posts [userType]="student" [post]="post"></app-posts>
+						</div>
+						<ng-template #notFollowing>
+							<div *ngIf="post.visibleToAll">
+								<app-posts [userType]="student" [post]="post"></app-posts>
+							</div>
+						</ng-template>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>

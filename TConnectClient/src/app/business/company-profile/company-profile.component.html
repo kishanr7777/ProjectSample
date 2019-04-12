@@ -1,0 +1,337 @@
+<div class="row"><br><br>
+  <div class="col-md-3"></div>
+  <div class="col-md-6  logo-background">
+    <div class="row ">
+      <div class="col-sm-3" title="Change Profile">
+        <!-- app avtar -->
+        <input name="profile" class="hide" type="file" (change)="profileChanged($event)" id="fileInput">
+        <app-avatar [type]="'organisation'" [height]="100" [width]="100" [profileUrl]="company.editCompanyObject.profileImageURL"
+          (click)="changeProfile()"></app-avatar>
+      </div>
+      <div class="col-sm-6">
+        <div class="company-info">
+
+          <span class="company-title">{{company.companyObject.name}}</span><br>
+          <span class="bold">{{company.companyObject.orgType}}</span> | <span class="bold">{{company.companyObject.location}}</span><br>
+          <span class="bold">{{company.companyObject.sector}}</span><br>
+          <span>{{company.companyObject.size}} employees</span><br>
+          <span><a class="cmp-link" [href]="company.companyObject.website" target="_blank">{{company.companyObject.website}}</a></span><br><br>
+
+        </div>
+      </div>
+      <div class="col-sm-3 clearfix"><br>
+        <span><a href="#" data-toggle="modal" data-target="#companyProfile" (click)="resetEditCompanyObject()"><img
+              class="pull-right edit-pen" alt="Edit" src="/assets/img/edit-white.svg"></a></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-default" data-toggle="modal" data-target="#manageAgent">Manage Agents</button>
+      </div>
+      <div class="col-sm-3"><br>
+        <img class="edit-pen" alt="File" src="/assets/img/file-white.svg">
+        <span class="company-info"> Media[<span>0</span>]</span>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 cmp-profile">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#about">About Us</a></li>
+      <li><a data-toggle="tab" href="#projects">Projects</a></li>
+      <li><a data-toggle="tab" href="#working">Working Here</a></li>
+      <li><a data-toggle="tab" href="#opportunities">Opportunities({{totalOpps}})</a></li>
+      <li><a data-toggle="tab" href="#posts">Posts({{totalPosts}})</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="about" class="tab-pane fade in active">
+        <div class="row">
+          <div class="col-md-11">
+            <br>
+            <b>Bio:</b><br><span class="prewrap" *ngIf="company.companyObject.bio">{{company.companyObject.bio}}</span>
+            <span class="prewrap" *ngIf="!company.companyObject.bio">Please Enter Bio</span>
+          </div>
+          <div class="col-md-1">
+            <br><a href="#" data-toggle="modal" data-target="#companyBio" (click)="resetEditCompanyObject()"><img class="edit-pen"
+                alt="Edit" src="assets/img/edit-grey.svg"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-11">
+            <br>
+            <b>Our Mission</b><br>
+            <span class="prewrap" *ngIf="company.companyObject.mission">{{company.companyObject.mission}}</span>
+            <span class="prewrap" *ngIf="!company.companyObject.mission">
+              Please Enter Mission</span>
+          </div>
+          <div class="col-md-1">
+            <br><a href="#" data-toggle="modal" data-target="#ourMission" (click)="resetEditCompanyObject()"><img class="edit-pen"
+                alt="Edit" src="assets/img/edit-grey.svg"></a>
+          </div>
+        </div>
+
+
+      </div>
+      <div id="projects" class="tab-pane fade">
+        <div class="project-template " *ngFor="let project of company.companyObject.project; index as i">
+          <div class="row">
+            <div class="col-md-11">
+              <span><b>{{project.title}}</b></span>
+              <div>{{project.description}}</div>
+            </div>
+            <div class="col-md-1">
+              <img class=" edit-pen delete-button" alt="Delete" src="assets/img/delete-grey.svg" (click)="deleteProject(i)">
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <a class="add-project" href="#" data-toggle="modal" data-target="#addProject" (click)="resetEditCompanyObject()">+
+          Add Project</a>
+
+      </div>
+      <div id="working" class="tab-pane fade">
+        <div class="row">
+
+          <div class="col-md-11">
+            <br>
+            <b>Working Here</b><br>
+            <span class="prewrap" *ngIf="company.companyObject.workingHere">{{company.companyObject.workingHere}}</span>
+            <span class="prewrap" *ngIf="!company.companyObject.workingHere">
+              Please Fill Working Here Part.</span>
+          </div>
+          <div class="col-md-1">
+            <br><a href="#" data-toggle="modal" data-target="#workingHere" (click)="resetEditCompanyObject()"><img
+                class="edit-pen" alt="Edit" src="assets/img/edit-grey.svg"></a>
+
+          </div>
+        </div>
+      </div>
+      <div id="opportunities" class="tab-pane fade">
+         <!--opp-->
+         <div *ngFor="let opportunity of opportunities">
+					  <app-opportunity [userType]="user.agent.type" [opportunity]="opportunity"></app-opportunity>
+				 </div>
+        <!--end opp-->
+      </div>
+      <div id="posts" class="tab-pane fade">
+         <!--LoadPost-->
+         <div *ngFor="let post of posts">
+            <app-posts (reply)="updateReplies($event)" [userType]="user.agent.type" [post]="post"></app-posts>
+         </div>
+          <!--end load post-->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+
+
+<!--modals-->
+<!--Comapny Profile-->
+
+
+<div class="modal fade" id="companyProfile" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div>
+            <label class="control-label">CompanyName*</label>
+            <input type="text" class="form-control" placeholder="Enter CompanyName" [(ngModel)]="company.editCompanyObject.name">
+          </div>
+          <div>
+            <label class="control-label">Oragnization Type*</label>
+            <mat-select class="form-control" [(ngModel)]="company.editCompanyObject.orgType">
+              <mat-option *ngFor="let type of organizationType" [value]="type">{{ type }} </mat-option>
+            </mat-select>
+          </div>
+          <div>
+            <label class="control-label">Oragnization Size*</label>
+            <mat-select class="form-control" [(ngModel)]="company.editCompanyObject.size">
+              <mat-option *ngFor="let type of organizationSize" [value]="type">{{ type }} employees</mat-option>
+            </mat-select>
+
+          </div>
+          <div>
+            <label class="control-label">Sector*</label>
+            <mat-select class="form-control" multiple [(ngModel)]="company.editCompanyObject.sector">
+              <mat-select-trigger> {{company.editCompanyObject.sector? company.editCompanyObject.sector[0] :
+                ''}} 
+                <span *ngIf="company.editCompanyObject.sector ">
+                <span *ngIf="company.editCompanyObject.sector.length > 1 ">
+                  (+{{company.editCompanyObject.sector.length - 1}} others) 
+                </span>
+              </span>
+               </mat-select-trigger>
+              <mat-option *ngFor="let sector of sectors" [value]="sector">{{ sector }}</mat-option>
+            </mat-select>
+          </div>
+          <div>
+            <label class="control-label">Location*</label>
+            <mat-select class="form-control" [(ngModel)]="company.editCompanyObject.location">
+              <mat-option *ngFor="let country of countryList" [value]="country">{{ country }}</mat-option>
+            </mat-select>
+          </div>
+          <div>
+            <label class="control-label">Website*</label>
+            <input type="text" class="form-control" placeholder="Enter Website" [(ngModel)]="company.editCompanyObject.website">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="compareCompany()" (click)="editCompany()">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--Comapny Bio-->
+
+
+<div class="modal fade" id="companyBio" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Biography</h4>
+      </div>
+      <div class="modal-body">
+        <textarea [(ngModel)]="company.editCompanyObject.bio" class="cus-textbox" rows="8" placeholder="Enter Bio"></textarea>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="compareCompany()" (click)="editCompany()">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Our Mission-->
+<div class="modal fade" id="ourMission" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Mission</h4>
+      </div>
+      <div class="modal-body">
+        <textarea [(ngModel)]="company.editCompanyObject.mission" class="cus-textbox" rows="8" placeholder="Please Enter Mission"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="compareCompany()" (click)="editCompany()">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--add Project-->
+
+
+<div class="modal fade" id="addProject" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Project</h4>
+      </div>
+      <div class="modal-body" [formGroup]="project">
+        <div>
+          <input type="text" class="form-control" placeholder="Enter Project Title" formControlName="title" required>
+          <div *ngIf="project.controls.title.errors && (project.controls.title.touched || project.controls.title.dirty)"
+            class="form-error">
+            <div *ngIf="project.controls.title.errors.required">Title must required</div>
+          </div>
+        </div>
+        <div>
+          <textarea class="cus-textbox" rows="8" placeholder="Enter Project Description" formControlName="description"
+            required></textarea>
+          <div *ngIf="project.controls.description.errors && (project.controls.description.touched || project.controls.description.dirty)"
+            class="form-error">
+            <div *ngIf="project.controls.description.errors.required">Description must required</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addProject()" [disabled]="!project.valid">Add</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- working Here-->
+<div class="modal fade" id="workingHere" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Working Here - Edit Content</h4>
+      </div>
+      <div class="modal-body">
+        <textarea [(ngModel)]="company.editCompanyObject.workingHere" class="cus-textbox" rows="8"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editCompany()" [disabled]="compareCompany()">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--ManageAgent-->
+<div class="modal fade" id="manageAgent" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Manage Agent</h4>
+      </div>
+      <div class="modal-body">
+        <div class="manage-agent-title">
+          To invite another agent
+        </div>
+        <div class="manage-agent-data">
+          <div>1.Send them to this link:</div>
+          <div><input type="text" class="form-control" [value]="manageAgentUrl+'/agentsignup/'+company.companyObject.name"
+              disabled></div>
+          <div>2.Supply them with this access code:</div>
+          <div><input type="text" class="form-control" [value]="company.companyObject.accessCode" disabled></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngFor="let reply of replies">
+	<div class="row reply-input">
+		<div class="col-xs-1 old-comment-image-container">
+			<app-avatar class="old-comment-image" [type]="'personal'" [height]="25" [width]="25" [profileUrl]="reply.profileImgURL"></app-avatar>
+		</div>
+		<div class="col-xs-11">
+			<span class="old-comment-container"><b>{{reply.firstName}} {{reply.lastName}}: </b>{{reply.text}}</span><span>{{reply.creationTime | amTimeAgo}}</span>
+		</div>
+	</div>
+</div>
+<div class="row doComment replies">
+	<div class="col-xs-1 comment-container">
+		<app-avatar class="comment-image" [type]="'personal'" [height]="25" [width]="25" [profileUrl]="user.user.profileImageURL"></app-avatar>
+	</div>
+	<div class="col-xs-6 reply-textarea">
+		<input placeholder="Write a Reply" [(ngModel)]="replyText" class="form-control" autofocus #reply="ngModel" required/>
+	</div>
+	<div class="col-xs-2 post-comment">
+		<button (click)="doReply()" class="btn btn-primary" [disabled]="reply.invalid">Reply</button>
+	</div>
+</div>

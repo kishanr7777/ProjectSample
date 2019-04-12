@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.form-error{color:red;}
+a{cursor: pointer;}
+.avatar{cursor: pointer;}
+.cdk-overlay-container{z-index: 2000;}
+.prewrap{white-space: pre-wrap;}
+.bkground{background-color: #eee;background-size: cover;}

@@ -1,0 +1,218 @@
+<div class="container">
+        <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                        <!--Tab-->
+                        <mat-tab-group [(selectedIndex)]="tab" dynamicHeight="true" (selectedTabChange)="tabChange()">
+                                <mat-tab [label]="'Posts'+'('+totalPosts+')'"></mat-tab>
+                                <mat-tab [label]="'Opportunities'+'('+totalOpps+')'"></mat-tab>
+                                <mat-tab label="Media"></mat-tab>
+                        </mat-tab-group>
+                        <!--end-->
+                        <div *ngIf="tab===0">
+                                <!--Create new post-->
+                                <div class="new-post">
+                                        <div class="top">
+                                                <app-avatar [type]="'organisation'" [height]="40" [width]="40"
+                                                        [profileUrl]="company.editCompanyObject.profileImageURL"></app-avatar>
+                                                <div class="avtar-text" style="font-weight: 900;">{{user.agent.firstName}}
+                                                        {{user.agent.lastName}}<span style="font-weight: normal;">
+                                                                at</span> {{company.companyObject.name}}</div>
+                                        </div>
+                                        <div [formGroup]="postForm">
+                                                <textarea class="writepost" placeholder="Write a Post .."
+                                                        formControlName="content"></textarea>
+                                        </div>
+                                        <div>
+                                                <mat-select class="university" [(ngModel)]="selected" placeholder="select Universities"
+                                                        (selectionChange)="selectUniversities()" multiple>
+                                                        <mat-select-trigger> {{selected ? selected[0] :
+                                                                ''}} <span *ngIf="selected[0] != 'All Universities' && selected.length > 1 ">
+                                                                        (+{{selected.length - 1}} others) </span>
+                                                        </mat-select-trigger>
+                                                        <mat-option #allS value="All Universities">--All Universities--
+                                                        </mat-option>
+                                                        <mat-option [disabled]="allS.selected" *ngFor="let university of universitiesList"
+                                                                [value]="university">{{university}}</mat-option>
+                                                </mat-select>
+                                        </div>
+                                        <div [formGroup]="postForm">
+                                                <mat-checkbox formControlName="visibleToAll">Public</mat-checkbox>
+                                        </div>
+                                        <div class="flex">
+                                                <div *ngFor="let attachment of files">
+                                                        <div style="max-width: 100%; border-radius: 50px; padding: 5px 10px; box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1); display: inline-block; background: #04a9f4; color: #fff; margin-bottom: 15px;margin-right: 5px;">{{attachment.preview}}
+                                                                <span class="glyphicon glyphicon-remove file-attachment"
+                                                                        (click)="removeAttachment(attachment)"></span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="flex">
+                                                <div *ngFor="let attachment of pics" style="width: 50%;">
+                                                        <div class="pic" [ngStyle]="{'background-image': 'url(' + attachment.preview + ')'}">
+                                                                <span class="glyphicon glyphicon-remove cancel-attachment"
+                                                                        (click)="removeAttachment(attachment)"></span>
+                                                                <div style="padding-top: 100%;"></div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="flex">
+                                                <div *ngFor="let attachment of videos" style="position:relative;width: 50%;margin: 10px;">
+                                                        <video width="100%" height="100%" controls controlsList="nodownload">
+                                                                <source src="{{attachment.preview}}">
+                                                                Your browser does not support HTML5 video.
+                                                        </video>
+                                                        <span class="glyphicon glyphicon-remove video-attachment"
+                                                                (click)="removeAttachment(attachment)"></span>
+                                                </div>
+                                        </div>
+                                        <div>
+                                                <input name="attachedFile" class="hide" type="file" #att id="attachmentFileInput"
+                                                        (change)="PreviewFiles(att.files)" multiple>
+                                                <button class="btn grey post-btn" (click)="attachFileInput()">attach
+                                                        file</button>
+                                                <button class="btn blue post-btn" (click)="writepost()" [disabled]="!(this.postForm.valid===true && this.filePrompts === false)">post</button>
+                                        </div>
+                                        <div class="form-error">
+                                                {{postMessage}}
+                                        </div>
+                                        <div class="form-error">
+                                                {{fileMessage}}
+                                        </div>
+                                </div>
+                                <!--end create post-->
+                                <!--LoadPost-->
+                                <div *ngFor="let post of posts">
+                                        <app-posts (reply)="updateReplies($event)" [userType]="user.agent.type" [post]="post"></app-posts>
+                                </div>
+                                <!--end load post-->
+                        </div>
+                        <div *ngIf="tab===1">
+                                <!--Create opportunities-->
+                                <div class="new-post">
+                                        <div class="top">
+                                                <app-avatar [type]="'organisation'" [height]="40" [width]="40"
+                                                        [profileUrl]="company.editCompanyObject.profileImageURL"></app-avatar>
+                                                <div class="avtar-text" style="font-weight: 900;">{{user.agent.firstName}}
+                                                        {{user.agent.lastName}}<span style="font-weight: normal;">
+                                                                at</span> {{company.companyObject.name}}</div>
+                                        </div>
+                                        <div [formGroup]="oppForm">
+                                                <div>
+                                                        <input type="text" placeholder="Headlines" class="form-control"
+                                                                formControlName="headline">
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-md-6">
+                                                                <mat-select class="university" placeholder="job type"
+                                                                        formControlName="jobType">
+                                                                        <mat-option *ngFor="let jobType of jobTypes"
+                                                                                [value]="'Volunteer'">{{jobType}}</mat-option>
+                                                                </mat-select>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                                <mat-select class="university" placeholder="Location"
+                                                                        formControlName="location">
+                                                                        <mat-option *ngFor="let country of countryList"
+                                                                                [value]="country">{{country}}</mat-option>
+                                                                </mat-select>
+                                                        </div>
+
+                                                </div>
+                                                <div>
+                                                        <mat-select class="university" placeholder="Job Function"
+                                                                formControlName="jobFunction">
+                                                                <mat-option *ngFor="let jobFunction of jobFunctions"
+                                                                        [value]="jobFunction">{{jobFunction}}</mat-option>
+                                                        </mat-select>
+                                                </div>
+                                                <div>
+                                                        <textarea class="writepost" placeholder="Job Description .."
+                                                                formControlName="description"></textarea>
+                                                </div>
+                                                <div class="row">
+                                                        <div class="col-md-6">
+                                                                <input type="text" placeholder="Application URL" class="form-control"
+                                                                        formControlName="url">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                                <input class="form-control" placeholder="Application Deadline"
+                                                                        matInput [matDatepicker]="picker" (click)="picker.open()"
+                                                                        formControlName="deadline">
+                                                        </div>
+                                                </div>
+                                                <div>
+                                                        <mat-checkbox formControlName="visibleToAll">Public</mat-checkbox>
+                                                </div>
+                                        </div>
+                                        <div>
+                                                <mat-select class="university" [(ngModel)]="selected" placeholder="select Universities"
+                                                        (selectionChange)="selectUniversities()" multiple>
+                                                        <mat-select-trigger> {{selected ? selected[0] :
+                                                                ''}} <span *ngIf="selected[0] != 'All Universities' && selected.length > 1 ">
+                                                                        (+{{selected.length - 1}} others) </span>
+                                                        </mat-select-trigger>
+                                                        <mat-option #allS value="All Universities">--All Universities--
+                                                        </mat-option>
+                                                        <mat-option [disabled]="allS.selected" *ngFor="let university of universitiesList"
+                                                                [value]="university">{{university}}</mat-option>
+                                                </mat-select>
+                                        </div>
+                                        <div class="flex">
+                                                        <div *ngFor="let attachment of files">
+                                                                <div style="max-width: 100%; border-radius: 50px; padding: 5px 10px; box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1); display: inline-block; background: #04a9f4; color: #fff; margin-bottom: 15px;margin-right: 5px;">{{attachment.preview}}
+                                                                        <span class="glyphicon glyphicon-remove file-attachment"
+                                                                                (click)="removeAttachment(attachment)"></span>
+                                                                </div>
+                                                        </div>
+                                        </div>
+                                        <div class="flex">
+                                                        <div *ngFor="let attachment of pics" style="width: 50%;">
+                                                                <div class="pic" [ngStyle]="{'background-image': 'url(' + attachment.preview + ')'}">
+                                                                        <span class="glyphicon glyphicon-remove cancel-attachment"
+                                                                                (click)="removeAttachment(attachment)"></span>
+                                                                        <div style="padding-top: 100%;"></div>
+                                                                </div>
+                                                        </div>
+                                        </div>
+                                        <div class="flex">
+                                                        <div *ngFor="let attachment of videos" style="position:relative;width: 50%;margin: 10px;">
+                                                                <video width="100%" height="100%" controls controlsList="nodownload">
+                                                                        <source src="{{attachment.preview}}">
+                                                                        Your browser does not support HTML5 video.
+                                                                </video>
+                                                                <span class="glyphicon glyphicon-remove video-attachment"
+                                                                        (click)="removeAttachment(attachment)"></span>
+                                                        </div>
+                                        </div>
+                                        <div>
+                                                <input name="attachedFile" class="hide" type="file" #att id="attachmentFileInputOpps"
+                                                        (change)="PreviewFiles(att.files)" multiple>
+                                                <button class="btn grey post-btn" (click)="attachFileInput()">attach
+                                                        file</button>
+                                                <button class="btn blue post-btn" (click)="writeOpp()" [disabled]="!this.oppForm.valid">post</button>
+                                        </div>
+                                        <div class="form-error">
+                                                {{postMessage}}
+                                        </div>
+                                        <div class="form-error">
+                                                {{fileMessage}}
+                                        </div>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                </div>
+                                <!--end create opp-->
+                                <!--opp-->
+                                <div *ngFor="let opportunity of opportunities">
+                                        <app-opportunity [userType]="user.agent.type" [opportunity]="opportunity"></app-opportunity>
+                                </div>
+                                <!--end opp-->
+                        </div>
+                        <div *ngIf="tab===2">
+                                media
+                        </div>
+
+
+                </div>
+        </div>
+
+</div>

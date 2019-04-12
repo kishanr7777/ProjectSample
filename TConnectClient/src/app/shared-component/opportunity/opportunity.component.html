@@ -1,0 +1,48 @@
+<div class="opportunity">
+	<div class="top">
+		<app-avatar [type]="'organisation'" [height]="80" [width]="80" [profileUrl]="opportunity.profileImgURL"></app-avatar>
+		<div class="avtar-text">
+			<div style="font-weight: 900;">{{opportunity.firstName}} {{opportunity.lastName}}<span style="font-weight: normal;">
+					at</span> {{opportunity.companyName}}</div>
+			<div>{{opportunity.creationTime | amTimeAgo}}</div>
+		</div>
+	</div>
+	<h4><b>{{opportunity.headline}}</b></h4>
+	<h5><b>{{opportunity.jobType}} in {{opportunity.jobFunction}}, {{opportunity.location}}</b></h5>
+	<h5>{{opportunity.description}}</h5>
+	<h5><b>Apply by {{opportunity.deadline | date:'dd/MM/yyyy'}}</b></h5><br>
+	<button class="btn btn-primary" (click)="navigate(opportunity.url)">Apply Online</button><br><br>
+	<span (click)="doLike(opportunity.likedByCurrentUser)">
+		<span *ngIf="opportunity.likedByCurrentUser">
+			<img class="like" alt="Thumb" height="15" src="../../assets/img/thumb-grey.svg">
+			You and {{opportunity.likes }} other liked this
+		</span>
+		<span *ngIf="!opportunity.likedByCurrentUser">
+			<img class="like" alt="Thumb" height="15" src="../../assets/img/thumb-black.svg">
+			({{opportunity.likes}}) likes
+		</span>
+	</span>
+	<span class="comments" (click)="showComments = !showComments">
+		<span *ngIf="opportunity.commentList;else countComment">
+			<span>{{opportunity.commentList?.length}}</span>
+		</span>
+		<ng-template #countComment>0</ng-template> comments
+	</span>
+
+	<div *ngIf="showComments" class="comment-list">
+		<app-comment-list [postId]="opportunity.creationTime" [type]="'opportunity'" [comments]="opportunity.commentList"></app-comment-list>
+	</div>
+
+	<div class="row doComment">
+		<div class="col-xs-1 comment-container">
+			<app-avatar class="comment-image" [type]="'personal'" [height]="40" [width]="40" [profileUrl]="user.user.profileImageURL"></app-avatar>
+		</div>
+		<div class="col-xs-9">
+			<textarea placeholder="Write Comments" [(ngModel)]="commentText" rows="2" class="form-control" #comment="ngModel" required></textarea>
+		</div>
+		<div class="col-xs-2 post-comment">
+			<button class="btn btn-primary" (click)="doComment()" [disabled]="comment.invalid">Post</button>
+		</div>
+	</div>
+
+</div>

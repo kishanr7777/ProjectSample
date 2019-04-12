@@ -1,0 +1,40 @@
+.banner { background: #000 url(../../../assets/img/banner.jpg) center no-repeat; height: 450px; width:100%;
+    background-size:cover;}
+
+.login-btn{position: absolute;right: 70px;top: 70px;}
+
+.register-form-container {font-size: 15px;}
+.register-form-container h2{text-align: center;}
+.register-form-container .register-form-tabs { border: solid 1px #ededed;}
+.register-form-container .register-form-tabs li{ width: 50%;}
+.register-form-container .register-form-tabs li a{ border: none; text-align: center; background: transparent;}
+.register-form-container .register-form-tabs .active { border-bottom: solid 5px orange; background: #ededed;}
+.register-form-container .register-form-content { padding: 15px; border: solid 1px #ededed; margin-bottom: 15px;}
+.register-form-container .register-form-content input { width: 100%; height: 35px; padding: 15px; border: solid 1px #ccc; border-radius: 0px;
+ background: #fff;}
+.register-form-container .register-form-content input:focus { border-color: #337ab7; box-shadow: 0px 0px 3px #337ab7;}
+.register-form-container .register-form-content .register-form-button-container { margin-bottom: 0px;}
+.register-form-container .register-form-content button { background: #286090; height: 35px; border: solid 1px #286090; width: 30%; color: white; 
+ border-radius: 0px; margin: 5px 0px 0px 0px; }
+.register-form-container .register-form-content button:hover { background: #1c4263;}
+.register-message{text-align: center}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+ .register-form-container .register-form-tabs { width: 520px; margin: auto;}
+ .register-form-container .register-form-content { width: 520px; margin: 0px auto 15px auto;}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+ .register-form-container .register-form-tabs { width: 520px; margin: auto;}
+ .register-form-container .register-form-content { width: 520px; margin: 0px auto 15px auto;}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+ .register-form-container .register-form-tabs { width: 520px; margin: auto;}
+ .register-form-container .register-form-content { width: 520px; margin: 0px auto 15px auto;}
+}
+
+@media screen and (min-width: 1200px) {
+ .register-form-container .register-form-tabs { width: 520px; margin: auto;}
+ .register-form-container .register-form-content { width: 520px; margin: 0px auto 15px auto;}
+}

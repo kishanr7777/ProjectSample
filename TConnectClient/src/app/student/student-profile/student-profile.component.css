@@ -1,0 +1,54 @@
+.cmp-profile{background-color: white;border-radius: 5px;padding: 20px 10px 70px 10px;}
+#skills{margin-top: 25px;}
+.logo-background{background-color: #F27F42;border-radius: 5px;padding: 10px 10px 10px 10px;}
+.company-info{color: white;font-size: 14px;}
+.company-title{font-size: 22px;font-weight: 800;}
+.bold{font-weight: 600;margin-bottom: 20px;}
+.edit-pen{height: 15px;width: 15px;position: relative;z-index: 2;margin-right: 5px;float: right;}
+.delete-button{margin-top: 10px;}
+.tab-content{margin-left: 10px;margin-top: 15px;}
+.project-template{margin-top: 20px;}
+.add-project{font-weight: 800;}
+.add-project:hover{text-decoration: none;}
+.cus-textbox{padding: 6px 10px!important;border-radius: 0!important;border: 1px solid #DDDDDD!important;width: 100%!important;display: block!important;background: transparent!important;}
+.prewrap{white-space: pre-wrap;}
+.btn-primary {background-color: #F27F42;border-color: #F27F42;}
+.add-delete-list{color:white;font-weight: 800;background-color: #F27F42;border-color: #F27F42;position: relative;display: inline-block;padding: 10px 0px 13px 15px;margin-right: 6px;margin-bottom: 10px;border-radius: 4px;}
+.glyphicon-remove:before {float: right;margin-right: 10px;padding-top: 3px;}
+.list-name{padding-right: 25px;}
+.glyphicon-remove:hover {color: black;cursor: pointer;}
+.achievement{color: #F27F42;font-weight: 1000;font-size: 15px;margin-top: 20px;display: block;}
+a:hover{text-decoration: none; color: black;}
+a:visited,a:focus{text-decoration: none;outline: none;}
+
+.profile-pic-container{position: relative;}
+.profile-pic-container .change-pic{ position: absolute; background: black;opacity: 1; color: white; bottom: 0px;
+    width: 100px; text-align: center; display: none;}
+.profile-pic-container:hover .change-pic{ display: block; cursor: pointer;}
+
+@media screen and (max-width: 420px) {
+ .logo-background{}
+ .cmp-profile ul li a{font-size: 11px;padding:10px 5px;}
+ 
+ 
+ 
+}
+@media screen and (min-width: 480px) and (max-width: 768px) {
+ 
+ 
+ 
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+ 
+ 
+ 
+ 
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+ 
+ 
+ 
+ 
+}

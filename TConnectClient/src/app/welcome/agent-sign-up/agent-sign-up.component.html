@@ -1,0 +1,105 @@
+<div class="container">
+	<div>
+		<div class="col-xs-3"></div>
+		<div class="col-xs-9"><h1>{{companyName}} on TConnect</h1></div>
+	</div>
+	<div>
+		<div class="col-xs-4">
+		</div>
+		<div class="col-xs-8 company-logo">
+			<app-avatar [type]="'organisation'" [height]="150" [width]="150" [profileUrl]="profileImageURL" ></app-avatar>
+		</div>
+	</div>
+	<div>
+			<div class="col-xs-3"></div>
+			<div class="col-xs-9"><h4>Sign up as an agent at {{companyName}}</h4></div>
+	</div>
+	<div class="form-error">
+		<div class="col-xs-3"></div>
+		<div class="col-xs-9">
+		  {{messageRegistered}}
+		  <span *ngIf="isRegistered">
+			<a routerLink="/login">Login</a>
+		  </span><br> {{failedMessage}}
+		</div>
+	
+	  </div>
+	<form class="form-horizontal" [formGroup]="agentForm">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="FirstName">FirstName:</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" placeholder="Enter FirstName" formControlName="firstName">
+				<div *ngIf="agentForm.controls.firstName.errors && (agentForm.controls.firstName.dirty || agentForm.controls.firstName.touched)"
+					class="form-error">
+					<div *ngIf="agentForm.controls.firstName.errors.required">firstname is required</div>
+					<div *ngIf="agentForm.controls.firstName.errors.minlength">firstname must be atleast 3 characters long</div>
+					<div *ngIf="agentForm.controls.firstName.errors.maxlength">firstname must be maximum 20 characters long</div>
+            	</div>
+			</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label col-sm-2" for="LastName">LastName:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" placeholder="Enter LastName" formControlName="lastName">
+					<div *ngIf="agentForm.controls.lastName.errors && (agentForm.controls.lastName.dirty || agentForm.controls.lastName.touched)"
+						class="form-error">
+						<div *ngIf="agentForm.controls.lastName.errors.required">lastname is required</div>
+						<div *ngIf="agentForm.controls.lastName.errors.minlength">lastname must be atleast 3 characters long</div>
+						<div *ngIf="agentForm.controls.lastName.errors.maxlength">lastname must be maximum 20 characters long</div>
+					</div>
+				</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label col-sm-2" for="Email">Email:</label>
+				<div class="col-sm-6">
+					<input type="email" class="form-control" placeholder="Enter Email Address" formControlName="email">
+					<div *ngIf="agentForm.controls.email.errors && (agentForm.controls.email.dirty || agentForm.controls.email.touched)"
+						class="form-error">
+						<div *ngIf="agentForm.controls.email.errors.required">email is required</div>
+						<div *ngIf="agentForm.controls.email.errors.pattern">Please Enter a valid email</div>
+					</div>
+				</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label col-sm-2" for="Password">Password:</label>
+				<div class="col-sm-6">
+					<input type="password" class="form-control" placeholder="Enter Password" formControlName="password">
+					<div *ngIf="agentForm.controls.password.errors && (agentForm.controls.password.dirty || agentForm.controls.password.touched)"
+						class="form-error">
+						<div *ngIf="agentForm.controls.password.errors.required">password is required</div>
+						<div *ngIf="agentForm.controls.password.errors.minlength">password must be atleast 8 characters long</div>
+						<div *ngIf="agentForm.controls.password.errors.maxlength">password must be maximum 16 characters long</div>
+						<div *ngIf="agentForm.controls.password.errors.pattern">Password must have 1 upper, 1 lower, 1 special
+							and 1 digit</div>
+					</div>
+				</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label col-sm-2" for="Confirm Password">ConfirmPassword:</label>
+				<div class="col-sm-6">
+					<input type="password" class="form-control" placeholder="Enter Confirm Password" formControlName="confirmPassword">
+					<div *ngIf="agentForm.controls.confirmPassword.errors && (agentForm.controls.confirmPassword.dirty || agentForm.controls.confirmPassword.touched)"
+					class="form-error">
+					<div *ngIf="agentForm.controls.confirmPassword.errors.required">confirm password is required</div>
+					</div>
+					<div class="form-error" *ngIf="(agentForm.controls.password.value != agentForm.controls.confirmPassword.value) && (agentForm.controls.confirmPassword.dirty || agentForm.controls.confirmPassword.touched)">
+					Password and Confirm Password does not match
+					</div>
+				</div>
+		</div>
+		<div class="form-group">
+				<label class="control-label col-sm-2" for="AccessCode">AccessCode:</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" placeholder="Enter AccessCode" formControlName="accessCode">
+					<div *ngIf="agentForm.controls.accessCode.errors && (agentForm.controls.accessCode.dirty || agentForm.controls.accessCode.touched)" class="form-error">
+						<div *ngIf="agentForm.controls.accessCode.errors.required">accessCode is required</div>
+					</div>
+				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary" (click)="registerAgent()" [disabled]="!this.agentForm.valid">Join Us</button>
+			</div>
+		</div>
+	</form>
+</div>

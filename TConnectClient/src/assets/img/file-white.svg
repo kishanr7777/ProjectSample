@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="104px" height="126px" viewBox="0 0 104 126" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/file/white</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icons/file/white" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M98.604,31.389 L73.184,5.969 C70.467,3.253 66.882,1.487 62.428,0.673 L62.428,42.143 L103.899,42.143 C103.084,37.688 101.318,34.104 98.604,31.389 L98.604,31.389 Z" id="Shape" fill="#FFFFFF"></path>
+        <path d="M59.822,52.571 C57.648,52.571 55.801,51.811 54.281,50.29 C52.76,48.77 52,46.923 52,44.75 L52,0.429 L7.679,0.429 C5.507,0.429 3.66,1.189 2.139,2.71 C0.618,4.23 -0.142,6.077 -0.142,8.25 L-0.142,117.75 C-0.142,119.923 0.618,121.77 2.139,123.29 C3.66,124.81 5.507,125.571 7.679,125.571 L96.323,125.571 C98.495,125.571 100.341,124.81 101.861,123.29 C103.382,121.769 104.142,119.923 104.142,117.75 L104.142,52.571 L59.822,52.571 L59.822,52.571 Z" id="Shape" fill="#FFFFFF"></path>
+    </g>
+</svg>

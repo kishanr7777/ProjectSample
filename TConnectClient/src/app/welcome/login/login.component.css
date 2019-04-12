@@ -1,0 +1,39 @@
+.login-form-container h2{text-align: center;}
+.login-form-container .login-form { width: 100%; padding: 15px; margin: 0px auto;}
+.login-form-container .login-form-group {margin-bottom: 15px;}
+.login-form-container .login-form-label {width: 100%}
+.login-form-container .login-form-input {width: 100%}
+.login-form-container .login-form-input input { width: 100%; height: 35px; padding: 15px; border: solid 1px #ccc;}
+.login-form-container .login-form-input input:focus { border-color: #337ab7; box-shadow: 0px 0px 3px #337ab7;}
+.login-form-container button { background: #286090; height: 35px; border: solid 1px #286090; width: 30%; color: white;}
+.login-form-container button:hover { background: #1c4263;}
+.login-form-container .login-form-offset { margin-left: 0px;}
+.login-form-container .login-form-offset span{ text-align: right; width: 70%; display: inline-block; }
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+ .login-form-container .login-form { width: 450px; }
+ .login-form-container .login-form-label {width: 20%; display: inline-block; padding: 0px 5px; text-align: right;}
+ .login-form-container .login-form-input {width: 80%; display: inline-block;}
+ .login-form-container .login-form-offset { margin-left: 20%;}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+ .login-form-container .login-form { width: 450px; }
+ .login-form-container .login-form-label {width: 20%; display: inline-block; padding: 0px 5px; text-align: right;}
+ .login-form-container .login-form-input {width: 80%; display: inline-block;}
+ .login-form-container .login-form-offset { margin-left: 20%;}
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+ .login-form-container .login-form { width: 450px; }
+ .login-form-container .login-form-label {width: 20%; display: inline-block; padding: 0px 5px; text-align: right;}
+ .login-form-container .login-form-input {width: 80%; display: inline-block;}
+ .login-form-container .login-form-offset { margin-left: 20%;}
+}
+
+@media screen and (min-width: 1200px) {
+ .login-form-container .login-form { width: 450px; }
+ .login-form-container .login-form-label {width: 20%; display: inline-block; padding: 0px 5px; text-align: right;}
+ .login-form-container .login-form-input {width: 80%; display: inline-block;}
+ .login-form-container .login-form-offset { margin-left: 20%;}
+}

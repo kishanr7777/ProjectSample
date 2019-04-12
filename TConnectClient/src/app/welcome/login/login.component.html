@@ -1,0 +1,47 @@
+<div class="login-form-container">
+    <div class="login-form">
+     <h2>Sign In</h2>
+   
+     <div class="login-form-offset form-error">{{passwordChangeMessage}}</div>
+   
+     <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal">
+      <div class="login-form-offset form-error">{{loginError}}</div>
+      <div class="login-form-group">
+       <label class="login-form-label" for="email">Email:</label>
+       <div class="login-form-input">
+        <input type="email" formControlName="email" placeholder="Enter email">
+       </div>
+       <div class="login-form-offset form-error" *ngIf="loginForm.controls.email.errors && (loginForm.controls.email.dirty || loginForm.controls.email.touched)">
+        <div *ngIf="loginForm.controls.email.errors.required">Enter a valid email</div>
+        <div *ngIf="loginForm.controls.email.errors.pattern">Enter a valid email</div>
+       </div>
+      </div>
+      <div class="login-form-group">
+       <label class="login-form-label" for="pwd">Password:</label>
+       <div class="login-form-input">
+        <input type="password" placeholder="Enter password" formControlName="password">
+       </div>
+       <div class="login-form-offset form-error" *ngIf="loginForm.controls.password.errors && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+        <div *ngIf="loginForm.controls.password.errors.required">Enter password</div>
+       </div>
+      </div>
+   
+      <div class="login-form-group">
+       <div class="login-form-offset">
+        <button type="submit" [disabled]="!this.loginForm.valid">Login</button>
+        <span><a routerLink="/forgotPassword">Forgot Password</a></span>
+       </div>
+      </div>
+      <div class="login-form-group">
+       <div class="login-form-offset">
+        <div class="login-form-new-user">
+         <span class="">
+          New User?
+          <a href=""> Register</a>
+         </span>
+        </div>
+       </div>
+      </div>
+     </form>
+    </div>
+   </div>

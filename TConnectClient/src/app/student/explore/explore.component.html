@@ -1,0 +1,19 @@
+<div class="explore-container">
+	<div *ngFor="let company of companyList" class="company-list">
+		<div class="company-list-item">
+			<img [style.width.%]="100" [style.height.%]="100" routerLink="/companyProfile/{{company.name}}" src="{{company.profileImageURL}}"
+			onerror="this.src='/assets/placeholder.png';"/>
+		</div>
+		<div>
+			<span>{{company.name}}</span>
+			<div>{{company.totalOpportunities}} Opportunities | {{company.size}} Employees</div>
+			<div *ngIf="company.followed">
+				<button class="follow-unfollow" (click)="followCompany(company, !company.followed)">Unfollow</button>
+
+			</div>
+			<div *ngIf="!company.followed">
+				<button class="follow-unfollow" (click)="followCompany(company, !company.followed)">Follow</button>
+			</div>
+		</div>
+ 	</div>
+</div>

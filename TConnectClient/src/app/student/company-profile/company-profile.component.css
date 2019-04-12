@@ -1,0 +1,15 @@
+.cmp-profile{background-color: white;border-radius: 5px;padding: 10px 10px 10px 10px;}
+.logo-background{background-color: #00A7F7;border-radius: 5px;padding: 10px 10px 10px 10px;}
+.company-info{color: white;font-size: 14px;}
+.company-title{font-size: 22px;font-weight: 800;}
+.cmp-link{color: white;text-decoration: underline;}
+.bold{font-weight: 600;}
+.edit-pen{height: 15px;width: 15px;position: relative;z-index: 2;}
+.delete-button{margin-top: 10px;cursor: pointer;}
+.tab-content{margin-left: 10px;}
+.project-template{margin-top: 20px;}
+.add-project{font-weight: 800;}
+.add-project:hover{text-decoration: none;}
+.cus-textbox{padding: 6px 10px!important;border-radius: 0!important;border: 1px solid #DDDDDD!important;width: 100%!important;display: block!important;background: transparent!important;}
+.follow-unfollow{background-color: orange;border: none;border-radius: 3px;padding: 5px 10px;color: white;}
+.follow-unfollow:hover{opacity: 0.8;text-decoration: none;border: none;}

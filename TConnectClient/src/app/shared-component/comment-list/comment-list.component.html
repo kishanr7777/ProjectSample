@@ -1,0 +1,47 @@
+<span class="clearfix">
+	<div *ngFor="let comment of comments;let i = index">
+		<div class="row">
+			<div class="col-xs-1 old-comment-image-container">
+				<app-avatar class="old-comment-image" [type]="'personal'" [height]="30" [width]="30" [profileUrl]="comment.statement.profileImgURL"></app-avatar>
+			</div>
+			<div class="col-xs-11">
+				<div>
+					<span class="old-comment-container" style="width: 75%;display:inline-block;">
+						<div style="display: inline-block;vertical-align: top;max-width: 40%;"><b>{{comment.statement.firstName}} {{comment.statement.lastName}}: </b></div>
+						<div style="display:inline-block;overflow-wrap: break-word;max-width: 60%;">{{comment.statement.text}}</div>
+					</span>
+					<span>{{comment.statement.creationTime | amTimeAgo}}</span>
+					<div class="comment-likes">
+						<span>
+							<span (click)="likeComment(comment)">
+								<span *ngIf="comment.likedByCurrentUser">
+									<img class="like" alt="Thumb" height="15" src="../../assets/img/thumb-grey.svg">
+								</span>
+								<span *ngIf="!comment.likedByCurrentUser">
+									<img class="like" alt="Thumb" height="15" src="../../assets/img/thumb-black.svg">
+								</span>
+							</span>
+							<span *ngIf="comment.likedByCurrentUser;else notLiked">
+								You and ({{comment.likes}}) other likes this
+							</span>
+							<ng-template #notLiked>
+								({{comment.likes}}) likes
+							</ng-template>
+							<span class="link" (click)="showReplyFunction(i)">
+								<span *ngIf="comment.replies;else replyLength">
+									({{comment.replies?.length}})
+								</span>
+								<ng-template #replyLength>(0)</ng-template>
+								replies
+							</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="showReply == i">
+			<app-reply-list [attr.id]="'reply'+i" [replies]="comment.replies" [commentId]="comment.statement.creationTime"
+			 [postId]="postId" [type]="type" (reply)="updateReplies($event)"></app-reply-list>
+		</div>
+	</div>
+</span>

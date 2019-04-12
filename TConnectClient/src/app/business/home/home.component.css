@@ -1,0 +1,89 @@
+.new-post{
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 20px;
+    box-shadow: 0px 0px 25px rgba(0,0,0,0.1);
+    padding: 15px 15px 0px 15px;
+    overflow: hidden;
+}
+.new-post h2{font-size:1.5em; font-weight: bold;margin-bottom: 8px;}
+.new-post p{padding-bottom:0;}
+.new-post div{margin-bottom: 10px;}
+
+.top{
+    display: flex;
+    margin-bottom: 15px; 
+}
+.avtar-text
+{
+    margin-top: 10px;
+    margin-left: 6px;
+}
+.writepost
+{
+    border: none;
+    display: block;
+    background-color: #eee;
+    border-radius: 3px;
+    width: 100%;
+    padding: 5px;
+}
+.university
+{
+    background-color: #eee;
+    height: 35px;
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+}
+.btn
+{
+    color: white;
+}
+.post-btn
+{
+    width: 40%;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.grey
+{
+    background-color: gray;
+}
+.blue
+{
+    background-color:#03A9F4;
+}
+
+.pic{
+    max-height: 350px;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 15px;
+}
+.flex
+{
+    display: flex;
+}
+.cancel-attachment
+{
+    float: right;
+    cursor: pointer;
+    padding: 10px;
+}
+.video-attachment
+{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+}
+.file-attachment
+{
+    cursor: pointer;
+}
+
+

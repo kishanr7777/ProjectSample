@@ -1,0 +1,20 @@
+.attach-btn{background-color: white;color: black;}
+.opportunity{margin-bottom: 20px;margin-top: 15px;border-bottom: 1px solid gray;background-color: white;padding:15px 15px;box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);padding: 10px 10px 10px 10px;border-radius: 5px;}
+.write-post{background-color: white;padding: 10px 10px 10px 10px;border-radius: 5px;}
+h2{text-align: center;}
+.avtar-text{margin-top: 20px;margin-left: 10px;}
+.top{display: flex;margin-bottom: 15px;}
+.like{cursor: pointer;}
+.like:hover{opacity: 0.7;}
+.comments{float:right;cursor: pointer;}
+.comment-list{padding:10px 10px;margin: 10px 10px;border-top: 1px solid #eee;padding-top: 28px;}
+.doComment{margin-top: 15px;}
+.doComment textarea{background-color: #eee;}
+.comment-container{padding-right: 0px;margin-top: 5px;}
+.comment-image{position: relative;left: 50%;top: 50%;margin-left:-20px;}
+button{width: 100%;background-color: #657889;border-color: #657889;}
+button:hover, button:focus, button:active, button:active:focus{background-color: #455665;border-color: #455565;outline: none;}
+.post-comment>button{width: 80px;}
+.post-comment{padding:0px 0px;margin-top:10px;}
+
+

@@ -1,0 +1,9 @@
+.explore-container{width: 35%;margin:auto;}
+.company-list{padding: 10px 10px;background-color: white;margin-bottom: 10px;border-radius: 5px;}
+.company-list-item{margin: 5px 15px 5px 5px;width: 80px;height: 80px;display: inline-block;vertical-align: top;}
+.company-list-item+div{display: inline-block;}
+.company-list-item+div>span{display: inline-block;font-size: 17px;font-weight: 800;vertical-align: top;}
+.follow-unfollow{margin-top: 11px;background-color: orange;border: none;border-radius: 3px;padding: 5px 10px;color: white;}
+.follow-unfollow:hover{opacity: 0.8;text-decoration: none;border: none;}
+img{cursor: pointer;}
+

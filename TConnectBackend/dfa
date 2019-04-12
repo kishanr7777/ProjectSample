@@ -1,0 +1,138 @@
+[33mcommit 7617f5294df4e790b78b932a6b9e9edeae8e4c0a[m[33m ([m[1;36mHEAD -> [m[1;32mpct22[m[33m, [m[1;31morigin/pct22[m[33m)[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Mon Dec 24 17:07:08 2018 +0530
+
+    update
+
+[33mcommit 233a225451d62a87c17ee1e93bb499d6799dbadc[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Mon Dec 24 17:05:48 2018 +0530
+
+    profile pic update works.
+
+[33mcommit 13f623da437ffcaccf074ca90463a372bdff717f[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 21 14:26:17 2018 +0530
+
+    working on profile image
+
+[33mcommit 6eaabe1b8d29258c0ba559b33dd6a2c6a688984a[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 21 11:08:56 2018 +0530
+
+    bug update
+
+[33mcommit a218986d5d343d4a2fe88eb1ac6a1910d26c9967[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Thu Dec 20 18:02:58 2018 +0530
+
+    bug fixes.
+
+[33mcommit f7f96fd1cb9718f2d12c98ebfb91d4a61768a574[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Thu Dec 20 12:36:51 2018 +0530
+
+    forgot password sends email.
+
+[33mcommit 41df36d1bb89ee785b9857e463a010a6f37d62c2[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Wed Dec 19 17:41:51 2018 +0530
+
+    19/12/2018 all set
+
+[33mcommit 4ed2e0f86f98edecdd0fb763413a7be5e73a70ae[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Tue Dec 18 17:36:38 2018 +0530
+
+    all is set
+
+[33mcommit dcc34fa230d5d46ede1e0c71e39a04ebb4145bc9[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Tue Dec 18 15:54:57 2018 +0530
+
+    merge complete
+
+[33mcommit 421a8694a4280e29cce0e2c0ce8639a4d48fa252[m
+Merge: 4fec538 6c6324c
+Author: NPatel10 <pct22@server7.com>
+Date:   Tue Dec 18 12:50:28 2018 +0530
+
+    merger of pct22 and pct140
+
+[33mcommit 4fec538366d3f84ba72eb31c54cc3c9a32e1941b[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Tue Dec 18 11:59:36 2018 +0530
+
+    created forgot password service.
+
+[33mcommit 6c6324cc31c57ab1e1ca8be7c112fa8d72822388[m[33m ([m[1;31morigin/pct140[m[33m, [m[1;32mpct140[m[33m)[m
+Author: Reema Gadhia <pct140@server7.com>
+Date:   Tue Dec 18 11:55:05 2018 +0530
+
+    asdf
+
+[33mcommit 3b059e4d096c6b85414d23d8156daaaee742ca34[m
+Author: Reema Gadhia <pct140@server7.com>
+Date:   Mon Dec 17 17:54:28 2018 +0530
+
+    Update User service can be accessed now
+
+[33mcommit 6439f3984e052cfe1ccb2cdf2cd350efb0ebd755[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Mon Dec 17 11:13:00 2018 +0530
+
+    added filter in userservice to intercept all the requset to check for the host and merge two requsts into one for register user.
+
+[33mcommit 1034dc74421633e3671b6ee4d2a584004cd05628[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 14 14:55:50 2018 +0530
+
+    user profile, company profile and company list can be retrived now.
+
+[33mcommit 17b9563f9e700c97bb880456479ceac72d8f3c69[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 14 12:03:24 2018 +0530
+
+    ds
+
+[33mcommit 05a619cbedb76b1abda8a635351146eb24d21b92[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 14 12:02:17 2018 +0530
+
+    ds
+
+[33mcommit 5df73a7f0c53ae2a5f0396b3e5f4ce162ca3248b[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 14 11:10:42 2018 +0530
+
+    update in hte userservice
+
+[33mcommit 7c84dd37326e9af739d57103c0229363d0a32917[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Fri Dec 14 11:02:40 2018 +0530
+
+    update in userservice
+
+[33mcommit 64cfb5f243deb6ff9ef7fa77091bc02f6f3ce56a[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Thu Dec 13 17:22:14 2018 +0530
+
+    update
+
+[33mcommit bc8a1ed71a6b3f7239d7768d02d030843a5bbd35[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Thu Dec 13 17:04:08 2018 +0530
+
+    login logout issue resolved. authorisation works properly. JWT token added for token based authorisation.
+
+[33mcommit 278c4e3a3e2b0c732437895bcf4cd66f1a145626[m[33m ([m[1;32mmaster[m[33m)[m
+Author: NPatel10 <pct22@server7.com>
+Date:   Thu Dec 13 11:49:48 2018 +0530
+
+    login, logout and registration done.
+
+[33mcommit 3c87eb9b87d4364577b51c5aaf3b4d9ad42d34f5[m
+Author: Reema Gadhia <pct140@server7.com>
+Date:   Tue Dec 11 18:16:53 2018 +0530
+
+    initial microservice commit

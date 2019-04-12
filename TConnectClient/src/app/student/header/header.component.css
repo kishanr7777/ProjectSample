@@ -1,0 +1,40 @@
+.icon {
+    height: 25px;
+}
+
+.avatar{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 11px;
+}
+
+.avatar.organisation{
+    border-radius: 100%;
+}
+
+.avatar.personal{
+    border-radius: 100%;
+} 
+
+.name{
+    color: #fff;
+}
+
+.nav li{
+    padding: 0px 10px;
+    line-height: 47px;
+}
+
+.temp{
+	border-radius: 100%;
+}
+.nav li:focus{
+	outline: none;
+	text-decoration: none;
+}
+.link{cursor: pointer;}
+.link:hover{text-decoration: underline;opacity: 0.7;}
+
